@@ -1,0 +1,87 @@
+#define font1 Hack Nerd Font Mono
+
+URxvt*letterSpace:    -1
+*font:                xft:font1:size=12
+*boldFont:            xft:font1:bold:size=12
+*italicFont:          xft:font1:italic:size=12
+*boldItalicFont:      xft:font1:bold:italic:size=12
+
+URxvt*scrollBar:                  false
+URxvt*mouseWheelScrollPage:       false
+URxvt*cursorBlink:                true
+URxvt*saveLines:                  5000
+URxvt.iso14755:                   false
+URxvt.keysym.Shift-Control-V:     eval:paste_clipboard
+URxvt.keysym.Shift-Control-C:     eval:selection_to_clipboard
+URxvt*termName:			  rxvt-unicode-256color
+URxvt*depth: 			  24
+URxvt.internalBorder: 		  16
+URxvt*skipBuiltinGlyphs:    	  true
+
+!Polar Night
+#define nordgrey1  #2e3440
+#define nordgrey2  #3b4252
+#define nordgrey3  #434c5e
+#define nordgrey4  #4c566a
+
+!Snow Storm
+#define nordwhite1 #d8dee9
+#define nordwhite2 #e5e9f0
+#define nordwhite3 #eceff4
+
+!Frost
+#define nordfrost1 #8fbcbb
+#define nordfrost2 #88c0d0
+#define nordfrost3 #81a1c1
+#define nordfrost4 #5e81ac
+
+!Aurora
+#define nordred    #bf616a
+#define nordorange #d08770
+#define nordyellow #ebcb8b
+#define nordgreen  #a3be8c
+#define nordpink   #b48ead
+
+URxvt.colorIT:     nordwhite1
+URxvt.colorBD:     nordpink
+URxvt.colorUL:     nordfrost4
+
+*fading: 	   35
+*fadeColor:        nordgrey4
+
+! special
+*.foreground:      nordwhite3 
+*.background:      nordgrey1 
+*.cursorColor:     nordfrost3 
+
+! black
+*.color0:          nordgrey4
+*.color8:          nordgrey4
+
+! red
+*.color1:          nordred
+*.color9:          nordred
+
+! green
+*.color2:          nordgreen
+*.color10:         nordgreen
+
+! yellow
+*.color3:          nordyellow
+*.color11:         nordyellow 
+
+! blue
+*.color4:          nordfrost3
+*.color12:         nordfrost3
+
+! magenta
+*.color5:          nordpink
+*.color13:         nordpink
+
+! cyan
+*.color6:          nordfrost2
+*.color14:         nordfrost2
+
+! white
+*.color7:          nordwhite1
+*.color15:         nordwhite1
