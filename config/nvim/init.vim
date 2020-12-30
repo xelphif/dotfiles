@@ -1,12 +1,12 @@
-"   NVIM CONFIGURATION                   "
+"    NVIM CONFIGURATION                  "
 """"""""""""""""""""""""""""""""""""""""""
 "                                        "
 " Sections:                              "
 "    -> Plugins: 15                      "
-"    -> General: 69                      "
-"    -> Remaps: 168                      "
-"    -> Plugin Settings and Remaps: 233  "
-"    -> Misc: 286                        "
+"    -> General: 75                      "
+"    -> Remaps: 180                      "
+"    -> Plugin Settings and Remaps: 259  "
+"    -> Misc: 324                        "
 "                                        "
 """"""""""""""""""""""""""""""""""""""""""
 
@@ -31,7 +31,6 @@ let g:coc_global_extensions = [
 \ 'coc-vimlsp',
 \ 'coc-json',
 \ 'coc-prettier',
-\ 'coc-pairs',
 \ 'coc-yank'
 \]
 
@@ -43,16 +42,24 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 
 " Formatting
+" Plug 'sbdchd/neoformat'
 Plug 'prettier/vim-prettier', {
+\ 'do': 'yarn install',
 \ 'branch': 'release/0.x'
 \ }
 let g:prettier#config#parser = 'babylon'
+
+" Auto bracket pairing
+Plug 'jiangmiao/auto-pairs'
 
 " Marks changes to line as you make them
 Plug 'dense-analysis/ale'
 
 " Movement
 Plug 'unblevable/quick-scope'
+
+" Sudo save
+Plug 'lambdalisue/suda.vim'
 
 " Aesthetics
 Plug 'arcticicestudio/nord-vim'
@@ -64,12 +71,15 @@ Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 
-"""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""
 " => General
 """"""""""""""""""""""""""""""""""""""""""
 
-" set colorscheme to nord on bootup
+" set colorscheme to dracula on bootup
 colorscheme nord
+
+" enable true colors
+" set termguicolors
 
 " Automatically turn on relative line numbers
 set nu relativenumber
@@ -162,6 +172,9 @@ set nobackup
 set nowb
 set noswapfile
 
+" allows yanking to system clipboard
+set clipboard=unnamedplus
+
 
 """"""""""""""""""""""""""""""""""""""""""
 " => Remaps
@@ -172,6 +185,11 @@ let mapleader = " "
 
 " open mini file manager in a split window
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar><CR>
+nnoremap <leader>ph :wincmd s<bar> :Ex <bar><CR>
+
+" open terminal in split window
+nnoremap <leader>ov :vsplit term://zsh<CR>
+nnoremap <leader>oh :split term://zsh<CR> :resize 13<CR>
 
 " navigate double windows with space+vim keys while in normal mode
 nnoremap <leader>h :wincmd h<CR>
@@ -224,6 +242,12 @@ nnoremap <M-j> :resize -2<CR>
 nnoremap <M-k> :resize +2<CR>
 nnoremap <M-l> :vertical resize +2<CR>
 
+" source shortcut
+nnoremap <C-s> :so%<CR>
+
+" close a buffer
+nnoremap <leader>bd :bd<CR>
+
 " find and replace
 nnoremap S :%s//gI<Left><Left><Left>
 
@@ -233,26 +257,38 @@ nnoremap S :%s//gI<Left><Left><Left>
 """"""""""""""""""""""""""""""""""""""""""
 
 " tpope commentary remaps
-" nmap <leader>e gcc
-" vmap <leader>e gc
 nmap ee gcc
 vmap ee gc
+nmap q gcc
+vmap q gc
 
 " open fzf and show hidden files
 map <leader>f <Esc><Esc>:Files<CR>
 map <leader>F <Esc><Esc>:Files ~/<CR>
 let $FZF_DEFAULT_COMMAND='find -L -maxdepth 4'
+" split rebinds
+let g:fzf_action= {
+            \'ctrl-s': 'split',
+            \'alt-s': 'split',
+            \'ctrl-v': 'vsplit',
+            \'alt-v': 'vsplit'
+            \}
 
 " only open up quickscope on presses
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-" Show coc explorer and close when alone
+" show coc explorer and close when alone
 nmap <leader>e :CocCommand explorer<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " enable tab completion for coc
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" press kk to complete snippets
+" imap kk <Plug>(coc-snippets-expand)
+
+" sudo save file
+command! W SudaWrite
 
 " air-line
 let g:airline_powerline_fonts = 1
@@ -261,18 +297,25 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
+" Makes top bar look better
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+
 " airline symbols
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
-let g:airline_symbols.maxlinenr = ''
 
 " show top bar
 set showtabline=2
 
 " hides the --INSERT under bar
 set noshowmode
+
 
 """"""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -281,8 +324,8 @@ set noshowmode
 " delete trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
-" :W sudo saves the file
-command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+" :W sudo saves the file (currently doesn't work in neovim)
+" command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -290,4 +333,4 @@ if has("win16") || has("win32")
     set wildignore+=.git\*,.hg\*,.svn\*
 else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif"
+endif
