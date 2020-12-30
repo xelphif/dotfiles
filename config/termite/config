@@ -6,7 +6,7 @@
 # License:    MIT
 
 [options]
-font = MesloLGS NF 12
+font = SourceCodePro 12
 
 [colors]
 cursor = #d8dee9
