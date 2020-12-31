@@ -1,4 +1,4 @@
-#define font1 Hack Nerd Font Mono
+#define font1 SourceCodePro
 
 URxvt*letterSpace:    -1
 *font:                xft:font1:size=12
@@ -50,9 +50,9 @@ URxvt.colorUL:     nordfrost4
 *fadeColor:        nordgrey4
 
 ! special
-*.foreground:      nordwhite3 
-*.background:      nordgrey1 
-*.cursorColor:     nordfrost3 
+*.foreground:      nordwhite3
+*.background:      nordgrey1
+*.cursorColor:     nordfrost3
 
 ! black
 *.color0:          nordgrey4
@@ -68,7 +68,7 @@ URxvt.colorUL:     nordfrost4
 
 ! yellow
 *.color3:          nordyellow
-*.color11:         nordyellow 
+*.color11:         nordyellow
 
 ! blue
 *.color4:          nordfrost3
