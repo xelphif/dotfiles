@@ -6,7 +6,7 @@
 # License:    MIT
 
 [options]
-font = SourceCodePro 12
+font = SauceCodePro Nerd Font 12
 
 [colors]
 cursor = #d8dee9

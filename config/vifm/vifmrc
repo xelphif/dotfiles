@@ -65,7 +65,7 @@ set norunexec
 
 " List of color schemes to try (picks the first one supported by the terminal)
 
-colorscheme nord 
+colorscheme nord
 
 " Numbers
 set nu relativenumber
@@ -200,6 +200,11 @@ filextype {*.ps,*.eps,*.ps.gz},<application/postscript>
         \ {View in gv}
         \ gv %c %i &,
 
+" Epub
+filextype {*.epub,*.epubpreview}, <application/epub>
+        \ {View in zathura}
+        \ zathura %f
+
 " Djvu
 filextype {*.djvu},<image/vnd.djvu>
         \ {View in zathura}
@@ -229,8 +234,8 @@ filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv
         \ mpv %f,
 
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ {View in viewnior}
-        \ viewnior,
+        " \ {View in viewnior}
+        " \ viewnior,
         \ {View in feh}
         \ feh %c,
 
@@ -264,12 +269,12 @@ fileviewer *.pdf
         \ vifmimg magickpreview %px %py %pw %ph %c
         \ %pc
         \ vifmimg clear
-        
+
     fileviewer <audio/*>
         \ vifmimg audiopreview %px %py %pw %ph %c
         \ %pc
         \ vifmimg clear
-        
+
     fileviewer <font/*>
         \ vifmimg fontpreview %px %py %pw %ph %c
         \ %pc
@@ -509,6 +514,12 @@ nnoremap <a-i> :sync<cr>
 nnoremap <a-o> :sync %c<cr>
 " Swap panes
 nnoremap <c-u> <c-w>x
+
+" move up and down 15 lines with Ctrl+J or K
+nnoremap <C-j> 15j
+nnoremap <C-k> 15k
+vnoremap <C-j> 15j
+vnoremap <C-k> 15k
 
 map > :!vifmimg inc<CR>
 map < :!vifmimg dec<CR>

@@ -25,6 +25,7 @@ let g:coc_global_extensions = [
 \ 'coc-snippets',
 \ 'coc-tag',
 \ 'coc-omni',
+\ 'coc-java',
 \ 'coc-syntax',
 \ 'coc-markdownlint',
 \ 'coc-git',
@@ -34,7 +35,10 @@ let g:coc_global_extensions = [
 \ 'coc-yank'
 \]
 
-" Fuzzy file finder
+" Syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+"" Fuzzy file finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -53,7 +57,7 @@ let g:prettier#config#parser = 'babylon'
 Plug 'jiangmiao/auto-pairs'
 
 " Marks changes to line as you make them
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 
 " Movement
 Plug 'unblevable/quick-scope'
@@ -255,6 +259,21 @@ nnoremap S :%s//gI<Left><Left><Left>
 """"""""""""""""""""""""""""""""""""""""""
 " => Plugin Settings and Remaps
 """"""""""""""""""""""""""""""""""""""""""
+
+" Syntax highlightinh module
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+}
+EOF
 
 " tpope commentary remaps
 nmap ee gcc
